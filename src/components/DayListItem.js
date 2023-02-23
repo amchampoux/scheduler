@@ -22,9 +22,7 @@ export default function DayListItem(props) {
     } else {
       spotRemaining += (spots + " spots remaining");
     }
-    console.log(spotRemaining);
     return spotRemaining
-
   };
 
   return (
