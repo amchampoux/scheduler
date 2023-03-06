@@ -3,7 +3,7 @@ import axios from "axios";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import { getAppointmentsForDay, getInterviewersForDay, getInterview } from "helpers/selectors";
 
 
 export default function Application(props) {
@@ -25,7 +25,6 @@ export default function Application(props) {
       axios.get('/api/interviewers')
     ]).then((all) => {      
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
-      console.log(state.interviewers);
     });
   });
 
@@ -33,12 +32,12 @@ export default function Application(props) {
 
   const mappedAppointments = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
+    const interviewers = getInterviewersForDay(state, state.day)
 
       return <Appointment
          key={appointment.id} 
          {...appointment} 
-        //  id={appointment.id}
-        //  time={appointment.time}
+         interviewers={interviewers}
          interview={interview}
       />
    });
@@ -56,9 +55,7 @@ export default function Application(props) {
         <DayList
           days={state.days} 
           value={state.day} 
-          // setDay={setDay}
-          onChange={setDay} 
-          
+          onChange={setDay}   
         />
         </nav>
         <img
@@ -68,10 +65,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {/* {state.appointments} */}
         {mappedAppointments}
-        {/* <Appointment 
-        /> */}
       </section>
     </main>
   );
