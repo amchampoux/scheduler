@@ -26,7 +26,7 @@ export default function Application(props) {
     ]).then((all) => {      
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
     });
-  });
+  }, []);
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
@@ -39,8 +39,27 @@ export default function Application(props) {
          {...appointment} 
          interviewers={interviewers}
          interview={interview}
+         bookInterview={bookInterview}
       />
    });
+
+  function bookInterview(id, interview) {
+    console.log("book interview info is", id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    setState({
+      ...state,
+      appointments
+    });
+  }
+
   
   return (
     <main className="layout">
