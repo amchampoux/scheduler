@@ -44,7 +44,6 @@ export default function Application(props) {
    });
 
   function bookInterview(id, interview) {
-    // console.log("book interview info is", id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -55,10 +54,14 @@ export default function Application(props) {
     };
 
     return axios.put(`/api/appointments/${id}`, {interview})
-      .then((response) => {
-          setState({...state, appointments}) 
-      });
-  }
+    .then((response) => {
+        setState({...state, appointments}) 
+    })
+  //   .catch(error => {
+  //     console.log("This is the error", error)
+  //     console.log("Code is", error.response.status)
+  // })
+}
 
   function cancelInterview(id, interview) {
     console.log("delete interview info is ", id, interview);
