@@ -10,6 +10,7 @@ export default function useApplicationData(props) {
     days: [],
     appointments: {},
     interviewers: {}
+
   });
 
   // The setDay action can be used to set the current day. 
@@ -27,9 +28,7 @@ export default function useApplicationData(props) {
   }, []);
 
 // The bookInterview action makes an HTTP request and updates the local state.
-
   function bookInterview(id, interview) {
-    // console.log("Number of spots is ", state.days[id].spots);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -39,15 +38,9 @@ export default function useApplicationData(props) {
       [id]: appointment
     };
 
-    // const spotsRemaining = {
-    //   ...state.days[id].spots
-    // } 
-    
     return axios.put(`/api/appointments/${id}`, {interview})
     .then((response) => {
         setState({...state, appointments}) 
-        // let spotsRemaining = state.days[id].spots;
-        // spotsRemaining -= 1;
     })
   }
 
