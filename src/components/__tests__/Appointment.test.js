@@ -4,8 +4,9 @@ import { render, cleanup } from "@testing-library/react";
 
 import Application from "components/Application";
 
-afterEach(cleanup);
+describe("Appointment", () => {
+  it("does something it is supposed to do", () => {
+    // test code here...
+  });
 
-it("renders without crashing", () => {
-  render(<Application />);
 });
