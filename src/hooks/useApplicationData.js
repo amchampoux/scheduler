@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "components/Application.scss";
+import { calculateSpotsForDay } from "helpers/selectors";
+
 
 
 export default function useApplicationData(props) {
@@ -10,7 +12,6 @@ export default function useApplicationData(props) {
     days: [],
     appointments: {},
     interviewers: {}
-
   });
 
   // The setDay action can be used to set the current day. 
@@ -27,8 +28,8 @@ export default function useApplicationData(props) {
     });
   }, []);
 
-  // The getUpdatedDays function is cloning days data and updating the spots available
-    function getUpdatedDays(appointment) {
+    // The getUpdatedDays function is cloning days data and updating the spots available
+   function getUpdatedDays(appointment) {
       const newDays = state.days.map(day => {
         if (state.day === day.name) {    
           const newDay = {
@@ -46,6 +47,7 @@ export default function useApplicationData(props) {
       return newDays
     }
 
+
 // The bookInterview action makes an HTTP request and updates the local state.
   function bookInterview(id, interview) {
     const appointment = {
@@ -56,14 +58,18 @@ export default function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment
     };
+    const days = state.days.map(day => {
+      if (day.name === state.day){
+          return {...day, spots: calculateSpotsForDay(state, state.day, appointments)}
+      }
+      return day;
+    });
 
     return axios.put(`/api/appointments/${id}`, {interview})
     .then((response) => {
-        const days = getUpdatedDays(appointment)
-        setState({...state, days, appointments}) 
-        
+        setState({...state, appointments, days})
     })
-  }
+  };
 
 // The cancelInterview action makes an HTTP request and updates the local state.
   function cancelInterview(id, interview) {
@@ -77,10 +83,16 @@ export default function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment
     };
+    const days = state.days.map(day => {
+      if (day.name === state.day){
+          return {...day, spots: day.spots + 1}
+      }
+      return day;
+    });
 
     return axios.delete(`/api/appointments/${id}`, {interview})
       .then((response) => {
-          const days = getUpdatedDays(appointment)
+          // const days = getUpdatedDays(appointment)
           setState({...state, days, appointments}) 
       });
   };
@@ -93,8 +105,3 @@ export default function useApplicationData(props) {
   }
 
 };
-
-
-
-
-
