@@ -180,11 +180,10 @@ describe("Application", () => {
         // 6. The delete error message is displayed.
         await waitForElement(() => getByText(appointment, "Sorry, cannot delete this appointment."));
         
-      //   // 7. Click the close button of the message.
+        // 7. Click the close button of the message.
         fireEvent.click(getByAltText(appointment, "Close"));
-        debug(appointment);
-        
-      //   // 8. The form should be displayed.
+
+        // 8. The form should be displayed.
         expect(getByText(appointment, "Archie Cohen")).toBeInTheDocument();
     
   });

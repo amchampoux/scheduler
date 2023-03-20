@@ -4,7 +4,6 @@ import "components/Application.scss";
 import { calculateSpotsForDay } from "helpers/selectors";
 
 
-
 export default function useApplicationData(props) {
 
   const [state, setState] = useState({
@@ -28,28 +27,9 @@ export default function useApplicationData(props) {
     });
   }, []);
 
-    // The getUpdatedDays function is cloning days data and updating the spots available
-   function getUpdatedDays(appointment) {
-      const newDays = state.days.map(day => {
-        if (state.day === day.name) {    
-          const newDay = {
-            ...day
-          }
-          if (appointment.interview === null) {  
-            newDay.spots += 1
-          } else {
-            newDay.spots -= 1
-          }
-          return newDay
-        }
-        return day        
-      });
-      return newDays
-    }
-
-
 // The bookInterview action makes an HTTP request and updates the local state.
   function bookInterview(id, interview) {
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -73,7 +53,6 @@ export default function useApplicationData(props) {
 
 // The cancelInterview action makes an HTTP request and updates the local state.
   function cancelInterview(id, interview) {
-    // console.log("delete interview info is ", id, interview);
 
     const appointment = {
       ...state.appointments[id],
@@ -92,7 +71,6 @@ export default function useApplicationData(props) {
 
     return axios.delete(`/api/appointments/${id}`, {interview})
       .then((response) => {
-          // const days = getUpdatedDays(appointment)
           setState({...state, days, appointments}) 
       });
   };
