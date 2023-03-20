@@ -64,6 +64,7 @@ export default function Appointment(props) {
         {mode === ERROR_SAVE && (
           <Error 
             onClose={back}
+            message="Sorry, cannot save this appointment."
           />
         )}
         {mode === DELETING && (
@@ -74,6 +75,7 @@ export default function Appointment(props) {
         {mode === ERROR_DELETE && (
           <Error 
             onClose={back}
+            message="Sorry, cannot delete this appointment."
           />
         )}
         {mode === SHOW && (
