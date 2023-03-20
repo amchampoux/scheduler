@@ -114,10 +114,10 @@ describe("Application", () => {
      await waitForElement(() => getByText(appointment, "Archie Cohen Cohen"));
 
      // 8. Check that the DayListItem with the text "Monday" also has the text "1 spot remaining".
-    //  const day = getAllByTestId(container, "day").find(day =>
-    //   queryByText(day, "Monday")
-    //  );
-    //  expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+     const day = getAllByTestId(container, "day").find(day =>
+      queryByText(day, "Monday")
+     );
+     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   });
 
   it("shows the save error when failing to save an appointment", async() => {
@@ -157,7 +157,7 @@ describe("Application", () => {
   
   it("shows the delete error when failing to delete an existing appointment", async() => {
         // 0. Block API call
-        axios.put.mockRejectedValueOnce();
+        axios.delete.mockRejectedValueOnce();
         
         // 1. Render the Application.
         const { container, debug } = render(<Application />);
@@ -181,12 +181,11 @@ describe("Application", () => {
         await waitForElement(() => getByText(appointment, "Sorry, cannot delete this appointment."));
         
       //   // 7. Click the close button of the message.
-      //   fireEvent.click(getByAltText(appointment, "Close"));
-    
-      //   // 8. The form should be displayed.
-      //   expect(getByDisplayValue(appointment, "Archie Cohen")).toBeInTheDocument();
+        fireEvent.click(getByAltText(appointment, "Close"));
         debug(appointment);
-      // });
+        
+      //   // 8. The form should be displayed.
+        expect(getByText(appointment, "Archie Cohen")).toBeInTheDocument();
     
   });
 
