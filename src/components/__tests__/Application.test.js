@@ -156,35 +156,35 @@ describe("Application", () => {
   });
   
   it("shows the delete error when failing to delete an existing appointment", async() => {
-        // 0. Block API call
-        axios.delete.mockRejectedValueOnce();
+    // 0. Block API call
+    axios.delete.mockRejectedValueOnce();
         
-        // 1. Render the Application.
-        const { container, debug } = render(<Application />);
+    // 1. Render the Application.
+    const { container, debug } = render(<Application />);
         
-        // 2. Wait until the text "Archie Cohen" is displayed.
-        await waitForElement(() => getByText(container, "Archie Cohen"));
+    // 2. Wait until the text "Archie Cohen" is displayed.
+    await waitForElement(() => getByText(container, "Archie Cohen"));
     
-        // 3. Click the "Delete" button on the booked appointment card.
-        const appointment = getAllByTestId(container, "appointment").find(appointment =>
-         queryByText(appointment, "Archie Cohen")
-        );
-        fireEvent.click(getByAltText(appointment, "Delete"));
+    // 3. Click the "Delete" button on the booked appointment card.
+    const appointment = getAllByTestId(container, "appointment").find(appointment =>
+     queryByText(appointment, "Archie Cohen")
+    );
+    fireEvent.click(getByAltText(appointment, "Delete"));
         
-        // 4. Check that the confirmation message is shown.
-        expect(getByText(appointment,"Are you sure you want to delete?")).toBeInTheDocument();
+    // 4. Check that the confirmation message is shown.
+    expect(getByText(appointment,"Are you sure you want to delete?")).toBeInTheDocument();
 
-        // 5. Click the "Confirm" button in the confirmation message.
-        fireEvent.click(queryByText(appointment, "Confirm"));
+    // 5. Click the "Confirm" button in the confirmation message.
+    fireEvent.click(queryByText(appointment, "Confirm"));
         
-        // 6. The delete error message is displayed.
-        await waitForElement(() => getByText(appointment, "Sorry, cannot delete this appointment."));
+    // 6. The delete error message is displayed.
+    await waitForElement(() => getByText(appointment, "Sorry, cannot delete this appointment."));
         
-        // 7. Click the close button of the message.
-        fireEvent.click(getByAltText(appointment, "Close"));
+    // 7. Click the close button of the message.
+    fireEvent.click(getByAltText(appointment, "Close"));
 
-        // 8. The form should be displayed.
-        expect(getByText(appointment, "Archie Cohen")).toBeInTheDocument();
+    // 8. The form should be displayed.
+    expect(getByText(appointment, "Archie Cohen")).toBeInTheDocument();
     
   });
 

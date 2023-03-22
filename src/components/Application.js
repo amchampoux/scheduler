@@ -1,6 +1,4 @@
 import React from "react";
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
 import "components/Application.scss";
 import useApplicationData from "hooks/useApplicationData";
 import DayList from "./DayList";
