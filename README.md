@@ -39,7 +39,13 @@ Single-page application (SPA) that allows users to book technical interviews bet
 
 ## Setup
 
-Install dependencies with `npm install`.
+For full functionality, the client and the API server applications must run concurrently: 
+
+* Start by forking and cloning the scheduler-api server [here](https://github.com/lighthouse-labs/scheduler-api).
+* Follow the steps outlined in README to install and setup the database.
+* Fork and clone this repo.
+* Navigate to the root directory and install dependencies with `npm install`.
+* Run the following command from the root directory of the project `npm start`.
 
 ## Running Webpack Development Server
 
@@ -64,15 +70,6 @@ npm run storybook
 ```sh
 npm run cypress
 ```
-
-## API server and Database Setup
-For full functionality, the client and the API server applications must run concurrently: 
-
-* Start by forking and cloning the scheduler-api server [here](https://github.com/lighthouse-labs/scheduler-api).
-* Follow the steps outlined in README to install and setup the database.
-* Fork and clone this repo.
-* Navigate to the root directory and install dependencies with `npm install`.
-* Run the following command from the root directory of the project `npm start`.
 
 ## Dependencies
 
