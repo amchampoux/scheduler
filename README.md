@@ -25,10 +25,17 @@ Single-page application (SPA) that allows users to book technical interviews bet
 
 ## Screenshots
 
-**Main page form**
+**Main page**
 
-<!-- !["Screenshot of main page form"](https://github.com/amchampoux/tweeter/blob/master/docs/desktop_tweet_form.gif) -->
+!["Screenshot of the main page"](https://github.com/amchampoux/scheduler/blob/master/docs/home.png)
 
+**Booking an inteview**
+
+!["Screenshot of booking state"](https://github.com/amchampoux/scheduler/blob/master/docs/book_interview.png)
+
+**Deleting an inteview**
+
+!["Screenshot of booking state"](https://github.com/amchampoux/scheduler/blob/master/docs/delete_interview.gif)
 
 ## Setup
 
@@ -52,11 +59,41 @@ npm test
 npm run storybook
 ```
 
-
 ## Running Cypress test suite
 
 ```sh
 npm run cypress
 ```
+
+## API server and Database Setup
+For full functionality, the client and the API server applications must run concurrently: 
+
+* Start by forking and cloning the scheduler-api server [here](https://github.com/lighthouse-labs/scheduler-api).
+* Follow the steps outlined in README to install and setup the database.
+* Fork and clone this repo.
+* Navigate to the root directory and install dependencies with `npm install`.
+* Run the following command from the root directory of the project `npm start`.
+
+## Dependencies
+
+* Axios
+* Classnames
+* Normalize.css
+* React
+* React-dom
+* React-scripts
+* Babel/core
+* Storybook/addon-actions
+* Storybook/addon-backgrounds
+* Storybook/addon-links
+* Storybook/addons
+* Storybook/react
+* Testing-library/jest-dom
+* Testing-library/react
+* Testing-library/react-hooks
+* Babel-loader
+* Node-sass
+* Prop-types
+* React-test-renderer
 
 
