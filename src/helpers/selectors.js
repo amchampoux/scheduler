@@ -39,19 +39,12 @@ export function getInterview(state, interview) {
 };
 
 export function calculateSpotsForDay(state, day, appointments) {
-  const dayObj = state.days.find((dayObj) => {
-    return dayObj.name === day
-  });
 
-  if (!dayObj) {
-    return null;
-  }
-  const appointmentsForDay = dayObj.appointments.map(id => appointments[id]);
-  const nullInterviews = appointmentsForDay.filter(appt => appt.interview === null);
-  const spots = nullInterviews.length;
-
-  return spots;
-}
+    const selectedDay = state.days.find(d => d.name === day);
+    const spots = selectedDay.appointments.filter(key => !appointments[key].interview);
+  
+    return spots.length;
+  };
 
 
   
