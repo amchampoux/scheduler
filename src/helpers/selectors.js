@@ -47,9 +47,7 @@ export function calculateSpotsForDay(state, day, appointments) {
     return null;
   }
   const appointmentsForDay = dayObj.appointments.map(id => appointments[id]);
-
   const nullInterviews = appointmentsForDay.filter(appt => appt.interview === null);
-
   const spots = nullInterviews.length;
 
   return spots;
