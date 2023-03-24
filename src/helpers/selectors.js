@@ -44,7 +44,7 @@ export function calculateSpotsForDay(state, day, appointments) {
     const spots = selectedDay.appointments.filter(key => !appointments[key].interview);
   
     return spots.length;
-  };
+};
 
 
   
